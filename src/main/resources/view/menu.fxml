@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.TextFlow?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="449.0"
+         prefWidth="735.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1"
+         xmlns="http://javafx.com/javafx/21">
+    <tabs>
+        <Tab text="Analyzer">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="415.0" prefWidth="654.0">
+                    <children>
+                        <TextArea layoutX="33.0" layoutY="31.0" prefHeight="358.0" prefWidth="427.0"/>
+                        <Button layoutX="486.0" layoutY="83.0" mnemonicParsing="false" text="Analyze"
+                                fx:id="analyzeButton"/>
+                        <TextField layoutX="486.0" layoutY="46.0"/>
+                        <Label layoutX="486.0" layoutY="28.0" text="Input file name"/>
+                        <Button layoutX="486.0" layoutY="121.0" mnemonicParsing="false" text="Save"/>
+                    </children>
+                </AnchorPane>
+            </content>
+        </Tab>
+        <Tab text="Help">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                    <children>
+                        <TextFlow layoutX="32.0" layoutY="29.0" prefHeight="362.0" prefWidth="670.0"/>
+                    </children>
+                </AnchorPane>
+            </content>
+        </Tab>
+    </tabs>
+</TabPane>
