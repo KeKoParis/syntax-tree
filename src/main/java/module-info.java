@@ -4,6 +4,7 @@ module com.example.lab4 {
     requires org.jsoup;
     requires stanford.corenlp;
     requires org.apache.opennlp.tools;
+    requires org.joda.time;
 
     opens controllers to javafx.fxml;
     exports controllers;

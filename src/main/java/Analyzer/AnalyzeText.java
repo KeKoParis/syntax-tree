@@ -1,22 +1,30 @@
 package Analyzer;
 
+import edu.stanford.nlp.pipeline.*;
+import edu.stanford.nlp.ling.*;
+import edu.stanford.nlp.semgraph.*;
+import edu.stanford.nlp.util.*;
+
 import opennlp.tools.cmdline.parser.ParserTool;
 import opennlp.tools.postag.POSModel;
 import opennlp.tools.postag.POSTaggerME;
 import opennlp.tools.tokenize.Tokenizer;
 import opennlp.tools.tokenize.TokenizerME;
 import opennlp.tools.tokenize.TokenizerModel;
-import opennlp.tools.parser.Parse;
+
 import opennlp.tools.parser.Parser;
 import opennlp.tools.parser.ParserFactory;
 import opennlp.tools.parser.ParserModel;
-import opennlp.tools.util.Span;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.List;
+import java.util.Properties;
 
 public class AnalyzeText {
-    public static void analyze() {
+
+    public static String analyze(String fileName) throws IOException {
+        long a = System.currentTimeMillis();
         ParserModel parserModel;
         TokenizerModel tokenizerModel;
         POSModel posModel;
@@ -28,7 +36,7 @@ public class AnalyzeText {
             posModel = new POSModel(posModelIn);
         } catch (IOException e) {
             e.printStackTrace();
-            return;
+            return "";
         }
 
         // Create the parser
@@ -41,43 +49,89 @@ public class AnalyzeText {
         POSTaggerME posTagger = new POSTaggerME(posModel);
 
         // Parse the text
-        String text = "The quick brown Paul jumps over the lazy dog.";
+        String text = ReadHTML.readHTML(fileName);
         String[] tokens = tokenizer.tokenize(text);
         String[] tags = posTagger.tag(tokens);
         opennlp.tools.parser.Parse[] topParses = ParserTool.parseLine(text, parser, 1);
 
+        StringBuilder stringBuilder = new StringBuilder();
         // Print the syntactic tree
         for (opennlp.tools.parser.Parse p : topParses) {
-            System.out.println("Syntactic Tree:");
-            System.out.println(p.toString());
-            System.out.println("Constituents:");
-            printConstituents(p, 0);
-            System.out.println("Tokens:");
-            printTokens(tokens, tags, text);
+            stringBuilder.append("Relations");
+            syntax_analysis(stringBuilder);
+            stringBuilder.append("Syntactic Tree:\n");
+            stringBuilder.append(p.toString() + "\n");
+            stringBuilder.append("Constituents:\n");
+            printConstituents(p, 0, stringBuilder);
+            stringBuilder.append("Tokens:\n");
+            stringBuilder.append(printTokens(tokens, tags, text));
+
         }
+        System.out.printf("time: %d\n", System.currentTimeMillis() - a);
+        return stringBuilder.toString();
     }
 
-    private static void printConstituents(opennlp.tools.parser.Parse p, int indent) {
-        StringBuilder sb = new StringBuilder();
+    private static StringBuilder printConstituents(opennlp.tools.parser.Parse p, int indent, StringBuilder stringBuilder) {
+        StringBuilder sb = stringBuilder;
         for (int i = 0; i < indent; i++) {
             sb.append("  ");
         }
         opennlp.tools.util.Span span = p.getSpan();
-        sb.append(p.getType()).append(" (").append(span.getStart()).append(", ").append(span.getEnd()).append(")");
-        System.out.println(sb.toString());
+        sb.append(p.getType()).append(" (").append(span.getStart()).append(", ").append(span.getEnd()).append(")").append("\n");
+        System.out.println(sb);
         for (opennlp.tools.parser.Parse child : p.getChildren()) {
-            printConstituents(child, indent + 1);
+            sb = printConstituents(child, indent + 1, sb);
         }
+        return sb;
     }
 
-    private static void printTokens(String[] tokens, String[] tags, String text) {
+    private static StringBuilder printTokens(String[] tokens, String[] tags, String text) {
         int start = 0;
+        StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < tokens.length; i++) {
             int end = start + tokens[i].length();
             String gender = getGender(tags[i]);
             String tense = getTense(tags[i]);
+            stringBuilder.append(tokens[i] + " (" + start + ", " + end + ") - " + tags[i] + " - Gender: " + gender + ", Tense: " + tense + "\n");
             System.out.println(tokens[i] + " (" + start + ", " + end + ") - " + tags[i] + " - Gender: " + gender + ", Tense: " + tense);
             start = end + 1;
+        }
+        return stringBuilder;
+    }
+
+    public static void syntax_analysis(StringBuilder stringBuilder) {
+        // Input text
+        String inputText = "London is the capital of the UK. Paris is the capital of France.";
+
+        // Set up Stanford CoreNLP pipeline
+        Properties props = new Properties();
+        props.setProperty("annotators", "tokenize, ssplit, pos, lemma, depparse");
+        StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
+
+        // Process the input text
+        Annotation document = new Annotation(inputText);
+        pipeline.annotate(document);
+
+        // Get the syntactic dependencies
+        List<CoreMap> sentences = document.get(CoreAnnotations.SentencesAnnotation.class);
+        for (CoreMap sentence : sentences) {
+            SemanticGraph dependencies = sentence.get(SemanticGraphCoreAnnotations.CollapsedCCProcessedDependenciesAnnotation.class);
+
+            // Iterate over the dependencies
+            for (SemanticGraphEdge edge : dependencies.edgeIterable()) {
+                IndexedWord gov = edge.getGovernor();
+                IndexedWord dep = edge.getDependent();
+
+                // Get the entities and the dependency type
+                String subject = gov.word();
+                String predicate = edge.getRelation().getShortName();
+                String object = dep.word();
+
+                // Print the semantic relationship
+                stringBuilder.append("Subject: " + subject + "\n");
+                stringBuilder.append("Predicate: " + predicate+ "\n");
+                stringBuilder.append("Object: " + object+ "\n\n");
+            }
         }
     }
 

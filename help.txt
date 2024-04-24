@@ -1,0 +1,96 @@
+Help page
+Enter filename for analyzing. There's only HTML acceptable.
+You can press save button after analyzing to create file with the result and your notes.
+
+All possible predicates:
+acl: Clausal modifier of a noun.
+advcl: Adverbial clause modifier.
+advmod: Adverbial modifier.
+amod: Adjectival modifier.
+appos: Appositional modifier.
+aux: Auxiliary.
+case: Case marking.
+cc: Coordinating conjunction.
+ccomp: Clausal complement.
+clf: Classifier.
+compound: Compound.
+conj: Conjunct.
+cop: Copula.
+csubj: Clausal subject.
+dep: Unspecified dependency.
+det: Determiner.
+discourse: Discourse element.
+dislocated: Dislocated elements.
+expl: Expletive.
+fixed: Fixed multiword expression.
+flat: Flat multiword expression.
+goeswith: Goes with (part of a word in a text that is written separately).
+iobj: Indirect object.
+list: List.
+mark: Marker.
+nmod: Nominal modifier.
+nsubj: Nominal subject.
+nummod: Numeric modifier.
+obj: Object.
+obl: Oblique nominal.
+orphan: Orphan.
+parataxis: Parataxis.
+punct: Punctuation.
+reparandum: Overridden disfluency.
+root: Root.
+vocative: Vocative.
+xcomp: Open clausal complement.
+
+All possible parts of speech:
+
+Noun (NN)
+Verb (VB)
+Adjective (JJ)
+Adverb (RB)
+Pronoun (PRP)
+Determiner (DT)
+Preposition (IN)
+Conjunction (CC)
+Interjection (UH)
+Article (ART)
+Numeral (CD)
+Particle (RP)
+Modal verb (MD)
+Symbol (SYM)
+Foreign word (FW)
+Coordinating conjunction (CC)
+Cardinal number (CD)
+Determiner (DT)
+Existential there (EX)
+Foreign word (FW)
+Preposition or subordinating conjunction (IN)
+Adjective (JJ)
+Adjective, comparative (JJR)
+Adjective, superlative (JJS)
+List item marker (LS)
+Modal (MD)
+Noun, singular or mass (NN)
+Noun, plural (NNS)
+Proper noun, singular (NNP)
+Proper noun, plural (NNPS)
+Predeterminer (PDT)
+Possessive ending (POS)
+Personal pronoun (PRP)
+Possessive pronoun (PRP$)
+Adverb (RB)
+Adverb, comparative (RBR)
+Adverb, superlative (RBS)
+Particle (RP)
+Symbol (SYM)
+to (TO)
+Interjection (UH)
+Verb, base form (VB)
+Verb, past tense (VBD)
+Verb, gerund or present participle (VBG)
+Verb, past participle (VBN)
+Verb, non-3rd person singular present (VBP)
+Verb, 3rd person singular present (VBZ)
+Wh-determiner (WDT)
+Wh-pronoun (WP)
+Possessive wh-pronoun (WP$)
+Wh-adverb (WRB)
