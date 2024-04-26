@@ -1,0 +1,224 @@
+[
+  {
+    "acl": {
+      "description": "Клаузальный модификатор существительного",
+      "example": "The book [that you recommended]"
+    }
+  },
+  {
+    "advcl": {
+      "description": "Обстоятельственный модификатор в виде придаточного предложения",
+      "example": "She left [when the sun went down]"
+    }
+  },
+  {
+    "advmod": {
+      "description": "Обстоятельственный модификатор в виде наречия",
+      "example": "He ran [quickly]"
+    }
+  },
+  {
+    "amod": {
+      "description": "Прилагательный модификатор",
+      "example": "A [beautiful] flower"
+    }
+  },
+  {
+    "appos": {
+      "description": "Аппозиционный модификатор",
+      "example": "My friend Mary, [a doctor], is coming over"
+    }
+  },
+  {
+    "aux": {
+      "description": "Вспомогательный глагол",
+      "example": "He [has] finished the work"
+    }
+  },
+  {
+    "case": {
+      "description": "Падежная маркировка",
+      "example": "She went [to] the store"
+    }
+  },
+  {
+    "cc": {
+      "description": "Координационный союз",
+      "example": "I like coffee [and] tea"
+    }
+  },
+  {
+    "ccomp": {
+      "description": "Клаузальный комплемент",
+      "example": "She believes [that he is innocent]"
+    }
+  },
+  {
+    "clf": {
+      "description": "Классификатор",
+      "example": "Three [cups] of coffee"
+    }
+  },
+  {
+    "compound": {
+      "description": "Составной",
+      "example": "The [New York] Times"
+    }
+  },
+  {
+    "conj": {
+      "description": "Соединительное слово",
+      "example": "I like [apples] and [oranges]"
+    }
+  },
+  {
+    "cop": {
+      "description": "Копула",
+      "example": "She [is] a teacher"
+    }
+  },
+  {
+    "csubj": {
+      "description": "Клаузальный подлежащий",
+      "example": "[That he arrived late] surprised everyone"
+    }
+  },
+  {
+    "dep": {
+      "description": "Неуказанная зависимость",
+      "example": "The man [who was wearing a hat]"
+    }
+  },
+  {
+    "det": {
+      "description": "Определитель",
+      "example": "Give me [the] book"
+    }
+  },
+  {
+    "discourse": {
+      "description": "Дискурсивный элемент",
+      "example": "[Well], I don't know"
+    }
+  },
+  {
+    "dislocated": {
+      "description": "Вынесенные элементы",
+      "example": "My car, [a blue sedan], is parked outside"
+    }
+  },
+  {
+    "expl": {
+      "description": "Эксплетив",
+      "example": "It [rains] a lot in this city"
+    }
+  },
+  {
+    "fixed": {
+      "description": "Фиксированное многокомпонентное выражение",
+      "example": "The [United States] of America"
+    }
+  },
+  {
+    "flat": {
+      "description": "Плоское многокомпонентное выражение",
+      "example": "My [mother and father] are coming"
+    }
+  },
+  {
+    "goeswith": {
+      "description": "Связано с",
+      "example": "I love ice [cream]"
+    }
+  },
+  {
+    "iobj": {
+      "description": "Косвенный объект",
+      "example": "She gave [him] a gift"
+    }
+  },
+  {
+    "list": {
+      "description": "Список",
+      "example": "I need to buy [apples, oranges, and bananas]"
+    }
+  },
+  {
+    "mark": {
+      "description": "Маркер",
+      "example":"Mary went to the store [because] she needed groceries"
+    }
+  },
+  {
+    "nmod": {
+      "description": "Существительный модификатор",
+      "example": "The book [on the table] is mine"
+    }
+  },
+  {
+    "nsubj": {
+      "description": "Существительное в подлежащем",
+      "example": "[John] is a doctor"
+    }
+  },
+  {
+    "nummod": {
+      "description": "Числовой модификатор",
+      "example": "I have [three] cats"
+    }
+  },
+  {
+    "obj": {
+      "description": "Объект",
+      "example": "She bought [a new car]"
+    }
+  },
+  {
+    "obl": {
+      "description": "Номинативное дополнение",
+      "example": "He is [in the park]"
+    }
+  },
+  {
+    "orphan": {
+      "description": "Орфан",
+      "example": "[There] is a book on the table"
+    }
+  },
+  {
+    "parataxis": {
+      "description": "Паратаксическая связь",
+      "example": "I saw him yesterday. [He was walking] down the street"
+    }
+  },
+  {
+    "punct": {
+      "description": "Пунктуация",
+      "example": "She said, [\"Hello!\"]"
+    }
+  },
+  {
+    "reparandum": {
+      "description": "Восстанавливаемые элементы",
+      "example": "He said, \"I am not, [I mean], I wasn't there\""
+    }
+  },
+  {
+    "root": {
+      "description": "Корень",
+      "example": "[Go] home!"
+    }
+  },
+  {
+    "vocative": {
+      "description": "Звательная форма",
+      "example": "Hey, [John], how are you?"
+    }
+  },
+  {
+    "xcomp": {
+      "description": "Безличный глагольный комплемент",
+      "example": "She started [to cry]"
+    }
+  }
+]

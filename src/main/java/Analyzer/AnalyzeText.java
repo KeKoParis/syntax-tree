@@ -15,11 +15,14 @@ import opennlp.tools.tokenize.TokenizerModel;
 import opennlp.tools.parser.Parser;
 import opennlp.tools.parser.ParserFactory;
 import opennlp.tools.parser.ParserModel;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
 public class AnalyzeText {
 
@@ -58,7 +61,7 @@ public class AnalyzeText {
         // Print the syntactic tree
         for (opennlp.tools.parser.Parse p : topParses) {
             stringBuilder.append("Relations");
-            syntax_analysis(stringBuilder);
+            syntax_analysis(stringBuilder, fileName);
             stringBuilder.append("Syntactic Tree:\n");
             stringBuilder.append(p.toString() + "\n");
             stringBuilder.append("Constituents:\n");
@@ -99,9 +102,26 @@ public class AnalyzeText {
         return stringBuilder;
     }
 
-    public static void syntax_analysis(StringBuilder stringBuilder) {
+    private static Map<String,String>  getPredicateExplanation() {
+        Map<String,String> map = new HashMap<>();
+        JSONParser jsonParser = new JSONParser();
+        try {
+            Object obj = jsonParser.parse(new FileReader("predicates.json"));
+            JSONObject jsonObject = (JSONObject) obj;
+            Set keys = jsonObject.keySet();
+            StringBuilder stringBuilder = new StringBuilder();
+            for (Object item : keys) {
+                map.put(item.toString() , jsonObject.get(item).toString());
+            }
+            return map;
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void syntax_analysis(StringBuilder stringBuilder, String fileName) throws IOException {
         // Input text
-        String inputText = "London is the capital of the UK. Paris is the capital of France.";
+        String inputText = ReadHTML.readHTML(fileName);
 
         // Set up Stanford CoreNLP pipeline
         Properties props = new Properties();
@@ -111,8 +131,8 @@ public class AnalyzeText {
         // Process the input text
         Annotation document = new Annotation(inputText);
         pipeline.annotate(document);
-
         // Get the syntactic dependencies
+        Map<String, String> map = getPredicateExplanation();
         List<CoreMap> sentences = document.get(CoreAnnotations.SentencesAnnotation.class);
         for (CoreMap sentence : sentences) {
             SemanticGraph dependencies = sentence.get(SemanticGraphCoreAnnotations.CollapsedCCProcessedDependenciesAnnotation.class);
@@ -129,8 +149,8 @@ public class AnalyzeText {
 
                 // Print the semantic relationship
                 stringBuilder.append("Subject: " + subject + "\n");
-                stringBuilder.append("Predicate: " + predicate+ "\n");
-                stringBuilder.append("Object: " + object+ "\n\n");
+                stringBuilder.append("Predicate: " + predicate + "\n\t" + map.get(predicate) + "\n");
+                stringBuilder.append("Object: " + object + "\n\n");
             }
         }
     }
